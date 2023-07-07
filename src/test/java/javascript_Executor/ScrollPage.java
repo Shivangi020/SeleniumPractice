@@ -1,0 +1,36 @@
+package javascript_Executor;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ScrollPage {
+	public static WebDriver driver;
+
+	public static void main(String[] args) {
+		System.setProperty("webdriver.chromedriver.driver", "Browser\\chromedriver_113.exe");
+		driver = new ChromeDriver();
+
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+
+		driver.get("http://omayo.blogspot.com/");
+		driver.manage().window().maximize();
+
+//		Scroll till end of page
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+		
+//		scroll till element is found
+		WebElement button = driver.findElement(By.id("myBtn"));
+		jse.executeScript("arguments[0].scrollIntoView(true)",button);
+
+		
+
+	}
+
+
+}
